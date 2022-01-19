@@ -2,9 +2,14 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const ConnectDB=require('./DB/db_init');
+
 require("dotenv/config");
 
 app.use(cors());
+
+//DB connection
+ConnectDB();
 
 app.use(bodyParser.json());
 app.get("/", (req, res) => {
