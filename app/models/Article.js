@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 const DOCUMENT_NAME = "Article";
 const COLLECTION_NAME = "articles";
 
+<<<<<<< HEAD
 export const articleSchema = new mongoose.Schema(
   {
     id: {
@@ -29,6 +30,29 @@ export const articleSchema = new mongoose.Schema(
     Picture: {
       type: mongoose.Schema.Types.String,
       required: true,
+=======
+
+export const articleSchema = new mongoose.Schema({
+    categorie: {                                
+        type: mongoose.Schema.Types.String,
+        required: true,
+    },
+    tags : [{ 
+        type: mongoose.Schema.Types.String,
+        required: true, 
+    }],
+    title: {
+        type: mongoose.Schema.Types.String,
+        required: true,
+    },
+    resume: {
+        type: mongoose.Schema.Types.String,
+        required: true,
+    },
+    picture : { 
+        type: mongoose.Schema.Types.String, 
+        required:true
+>>>>>>> b0ae3db4142b5fb438a8133e27e2c220395e87f6
     },
   },
   {
