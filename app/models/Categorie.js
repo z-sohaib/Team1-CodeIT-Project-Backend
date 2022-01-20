@@ -2,22 +2,18 @@ import mongoose from 'mongoose';
 const DOCUMENT_NAME = 'Categorie';
 const COLLECTION_NAME = 'categories';
 
-export const categorieSchema = new mongoose.Schema({ 
-    id : { 
-            type: mongoose.Schema.Types.String,
-            required: true, 
-    },
-    Name: {                                
+export const categorieSchema = new mongoose.Schema({
+    name: {                                
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    ListOfRoadMap: [{
+    listofroadmap: [{
         id : {
-    type: mongoose.Schema.Types.String,
-    required: true,
+        type: mongoose.Schema.Types.String,
+        required: true,
     }
       }],
-    ListOfArticles: [{
+    listofarticles: [{
         id : {
     type: mongoose.Schema.Types.String,
     required: true,

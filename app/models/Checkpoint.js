@@ -2,32 +2,28 @@ import mongoose from 'mongoose';
 const DOCUMENT_NAME = 'checkpoint';
 const COLLECTION_NAME = 'checkpoints';
 
-export const checkpointSchema = new mongoose.Schema({ 
-    id : { 
-            type: mongoose.Schema.Types.String,
-            required: true, 
-    },
-    Name: {                                
+export const checkpointSchema = new mongoose.Schema({
+    name: {                                
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    Number : { 
+    number : { 
         type: mongoose.Schema.Types.Number,
         required: true, 
     },
-    ExpValue: {
+    expvalue: {
         type: mongoose.Schema.Types.Number,
         required: true,
     },
-    ListOfPrimaryLinks: [ {
+    listOfprimarylinks: [ {
         type: mongoose.Schema.Types.String,
         required: true,
     }],
-    ListOfSecondaryLinks: [ {
+    listofsecondarylinks: [ {
         type: mongoose.Schema.Types.String,
         required: true,
     }],
-    Quizz:[
+    quizz:[
         {
             Question: { 
                 type: mongoose.Schema.Types.String,
@@ -44,7 +40,7 @@ export const checkpointSchema = new mongoose.Schema({
             
         }
     ], 
-    Project : {
+    project : {
         type: mongoose.Schema.Types.String,
         required: true,
     }

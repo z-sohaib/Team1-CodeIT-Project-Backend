@@ -3,20 +3,16 @@ const DOCUMENT_NAME = 'AdminAccount';
 const COLLECTION_NAME = 'adminAccounts';
 
 
-export const adminSchema = new mongoose.Schema({ 
-    id : { 
-            type: mongoose.Schema.Types.String,
-            required: true, 
-    },
-    Username: {                                
+export const adminSchema = new mongoose.Schema({
+    username: {                                
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    Email: {
+    email: {
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    Password: {
+    password: {
         type: mongoose.Schema.Types.String,
         required: true,
     }

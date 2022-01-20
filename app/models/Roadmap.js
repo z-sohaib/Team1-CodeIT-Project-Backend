@@ -3,16 +3,12 @@ const DOCUMENT_NAME = 'Roadmap';
 const COLLECTION_NAME = 'roadmaps';
 
 
-export const roadmapSchema = new mongoose.Schema({ 
-    id : { 
-            type: mongoose.Schema.Types.String,
-            required: true, 
-    },
-    Name: {                                
+export const roadmapSchema = new mongoose.Schema({
+    name: {                                
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    ListofCheckpoint: [
+    listofcheckpoint: [
           {
             id : {
         type: mongoose.Schema.Types.String,
