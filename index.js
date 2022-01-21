@@ -1,6 +1,10 @@
 import express from "express";
 import cors from "cors";
 import ConnectDB from "./DB/db_init.js"
+import Categorie from "./app/routes/Categorie.js"
+import roadmap from "./app/routes/RoadMap.js"
+import resMsg from "./app/controllers/ErrorsPage.js";
+
 
 import "dotenv/config";
 
@@ -19,10 +23,16 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+// Routing 
+app.use("/categorie", Categorie);
+app.use("/roadmap", roadmap);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the project");
 });
+app.all("*",(req,res)=>{
+  res.status(400).json(resMsg.notValide)
+})
 
 //DB connection
 ConnectDB();

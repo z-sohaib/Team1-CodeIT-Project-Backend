@@ -4,10 +4,6 @@ const COLLECTION_NAME = 'articles';
 
 
 export const articleSchema = new mongoose.Schema({ 
-    id : { 
-            type: mongoose.Schema.Types.String,
-            required: true, 
-    },
     Categorie: {                                
         type: mongoose.Schema.Types.String,
         required: true,
@@ -32,4 +28,4 @@ export const articleSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-export const ArticleModel = mongoose.model(DOCUMENT_NAME, articleSchema, COLLECTION_NAME)  
+export default mongoose.model(DOCUMENT_NAME, articleSchema, COLLECTION_NAME)  

@@ -3,10 +3,6 @@ const DOCUMENT_NAME = 'checkpoint';
 const COLLECTION_NAME = 'checkpoints';
 
 export const checkpointSchema = new mongoose.Schema({ 
-    id : { 
-            type: mongoose.Schema.Types.String,
-            required: true, 
-    },
     Name: {                                
         type: mongoose.Schema.Types.String,
         required: true,
@@ -52,4 +48,4 @@ export const checkpointSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-export const CheckPointModel = mongoose.model(DOCUMENT_NAME, checkpointSchema, COLLECTION_NAME)  
+export default mongoose.model(DOCUMENT_NAME, checkpointSchema, COLLECTION_NAME)  

@@ -4,18 +4,14 @@ const COLLECTION_NAME = 'roadmaps';
 
 
 export const roadmapSchema = new mongoose.Schema({ 
-    id : { 
-            type: mongoose.Schema.Types.String,
-            required: true, 
-    },
     Name: {                                
         type: mongoose.Schema.Types.String,
         required: true,
     },
     ListofCheckpoint: [
           {
-            id : {
-        type: mongoose.Schema.Types.String,
+            _id : {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         }
           }
@@ -24,4 +20,4 @@ export const roadmapSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-export const RoadmapModel = mongoose.model(DOCUMENT_NAME, roadmapSchema, COLLECTION_NAME)  
+export default mongoose.model(DOCUMENT_NAME, roadmapSchema, COLLECTION_NAME) 

@@ -2,29 +2,25 @@ import mongoose from 'mongoose';
 const DOCUMENT_NAME = 'Categorie';
 const COLLECTION_NAME = 'categories';
 
-export const categorieSchema = new mongoose.Schema({ 
-    id : { 
-            type: mongoose.Schema.Types.String,
-            required: true, 
-    },
-    Name: {                                
+export const categorieSchema = new mongoose.Schema({
+    Name: {
         type: mongoose.Schema.Types.String,
         required: true,
     },
     ListOfRoadMap: [{
-        id : {
-    type: mongoose.Schema.Types.String,
-    required: true,
-    }
-      }],
+        _id: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+        }
+    }],
     ListOfArticles: [{
-        id : {
-    type: mongoose.Schema.Types.String,
-    required: true,
-    }
-      }],
+        _id: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+        }
+    }],
 }, {
     timestamps: true,
 });
 
-export const categorieModel = mongoose.model(DOCUMENT_NAME, categorieSchema, COLLECTION_NAME)  
+export default mongoose.model(DOCUMENT_NAME, categorieSchema, COLLECTION_NAME)  
