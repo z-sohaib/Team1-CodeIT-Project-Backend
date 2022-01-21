@@ -4,44 +4,36 @@ const COLLECTION_NAME = 'userAccounts';
 
 
 
-const SubSchema = new mongoose.Schema ({ 
-    id : { 
-        type: mongoose.Schema.Types.String,
-            required: true, 
-    }, 
+const SubSchema = new mongoose.Schema ({
     checkPointId : { 
         type: mongoose.Schema.Types.String,
             required: true,     
     }
 }
 );
-export const userSchema = new mongoose.Schema({ 
-    id : { 
-            type: mongoose.Schema.Types.String,
-            required: true, 
-    },
-    UserName: {                                
+export const userSchema = new mongoose.Schema({
+    username: {                                
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    CategorieFav : { 
+    categoriefav : { 
         type: mongoose.Schema.Types.String,
         required: true, 
     },
-    Email: {
+    email: {
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    Password: {
+    password: {
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    RoadPosition:[SubSchema],
-    Exp : { 
+    roadposition:[SubSchema],
+    exp : { 
         type: mongoose.Schema.Types.Number, 
         required:true
     },
-    Notification: [ {
+    notification: [ {
         type: mongoose.Schema.Types.String,
         required: true,
     }],

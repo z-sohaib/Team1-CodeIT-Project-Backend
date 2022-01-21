@@ -3,16 +3,12 @@ const DOCUMENT_NAME = 'Message';
 const COLLECTION_NAME = 'messages';
 
 
-export const messageSchema = new mongoose.Schema({ 
-    id : { 
-            type: mongoose.Schema.Types.String,
-            required: true, 
-    },
-    UserEmail: {                                
+export const messageSchema = new mongoose.Schema({
+    useremail: {                                
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    Description: {
+    description: {
         type: mongoose.Schema.Types.String,
         required: true,
     },

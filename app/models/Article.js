@@ -3,24 +3,24 @@ const DOCUMENT_NAME = 'Article';
 const COLLECTION_NAME = 'articles';
 
 
-export const articleSchema = new mongoose.Schema({ 
-    Categorie: {                                
+export const articleSchema = new mongoose.Schema({
+    categorie: {                                
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    Tags : [{ 
+    tags : [{ 
         type: mongoose.Schema.Types.String,
         required: true, 
     }],
-    Title: {
+    title: {
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    Resume: {
+    resume: {
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    Picture : { 
+    picture : { 
         type: mongoose.Schema.Types.String, 
         required:true
     },

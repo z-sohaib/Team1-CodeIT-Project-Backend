@@ -8,7 +8,7 @@ export const roadmapSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    ListofCheckpoint: [
+    listofcheckpoint: [
           {
             _id : {
         type: mongoose.Schema.Types.ObjectId,

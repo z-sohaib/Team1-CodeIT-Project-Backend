@@ -2,24 +2,20 @@ import mongoose from 'mongoose';
 const DOCUMENT_NAME = 'ProjectSubmission';
 const COLLECTION_NAME = 'projectsubmissions';
 
-export const projectsubmissionSchema = new mongoose.Schema({ 
-    id : { 
-            type: mongoose.Schema.Types.String,
-            required: true, 
-    },
-    UserId: {                                
+export const projectsubmissionSchema = new mongoose.Schema({
+    user_id: {                                
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    RoadMapId:  {
+    roadmap_id:  {
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    CheckPointId: {
+    checkpoint_id: {
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    ProjectLink: {
+    projectlink: {
         type: mongoose.Schema.Types.String,
         required: true,
     },
