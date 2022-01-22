@@ -3,6 +3,7 @@ import cors from "cors";
 import ConnectDB from "./DB/db_init.js"
 import Categorie from "./app/routes/Categorie.js"
 import roadmap from "./app/routes/RoadMap.js"
+import Message from "./app/routes/Messages.js"
 import resMsg from "./app/controllers/ErrorsPage.js";
 
 
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routing 
 app.use("/categorie", Categorie);
 app.use("/roadmap", roadmap);
+app.use("/message",Message);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the project");
