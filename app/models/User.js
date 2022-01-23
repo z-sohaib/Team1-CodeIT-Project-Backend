@@ -5,7 +5,7 @@ const COLLECTION_NAME = 'userAccounts';
 
 
 const SubSchema = new mongoose.Schema ({
-    checkPointId : { 
+    checkPoint_id : { 
         type: mongoose.Schema.Types.String,
             required: true,     
     }
