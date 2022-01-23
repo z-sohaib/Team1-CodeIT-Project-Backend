@@ -1,31 +1,40 @@
-import mongoose from 'mongoose';
-const DOCUMENT_NAME = 'Article';
-const COLLECTION_NAME = 'articles';
+import mongoose from "mongoose";
+const DOCUMENT_NAME = "Article";
+const COLLECTION_NAME = "articles";
 
-
-export const articleSchema = new mongoose.Schema({
-    categorie: {                                
-        type: mongoose.Schema.Types.String,
-        required: true,
+export const articleSchema = new mongoose.Schema(
+  {
+    categorie: {
+      type: mongoose.Schema.Types.String,
+      required: true,
     },
-    tags : [{ 
-        type: mongoose.Schema.Types.String,
-        required: true, 
-    }],
-    title: {
+    tags: [
+      {
         type: mongoose.Schema.Types.String,
         required: true,
+      },
+    ],
+    title: {
+      type: mongoose.Schema.Types.String,
+      required: true,
     },
     resume: {
-        type: mongoose.Schema.Types.String,
-        required: true,
+      type: mongoose.Schema.Types.String,
+      required: true,
     },
-    picture : { 
-        type: mongoose.Schema.Types.String, 
-        required:true
+    picture: {
+      type: mongoose.Schema.Types.String,
+      required: true,
     },
-}, {
+  },
+  {
     timestamps: true,
-});
+  }
+);
 
-export default mongoose.model(DOCUMENT_NAME, articleSchema, COLLECTION_NAME)  
+const ArticleModel = mongoose.model(
+  DOCUMENT_NAME,
+  articleSchema,
+  COLLECTION_NAME
+);
+export default ArticleModel;
