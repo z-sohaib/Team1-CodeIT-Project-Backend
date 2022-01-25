@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,13 +17,9 @@
   },
   "homepage": "https://github.com/z-sohaib/Team1-CodeIT-Project-Backend#readme",
   "dependencies": {
-    "body-parser": "^1.19.1",
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
-    "dotenv": "^14.1.0",
     "express": "^4.17.2",
-    "mongoose": "^6.1.7"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
+    "mongoose": "^6.1.8"
   }
 }
