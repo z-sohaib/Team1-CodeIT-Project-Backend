@@ -4,6 +4,7 @@ import ConnectDB from "./DB/db_init.js"
 import Categorie from "./app/routes/Categorie.js"
 import roadmap from "./app/routes/RoadMap.js"
 import Message from "./app/routes/Messages.js"
+import Checkpoint from "./app/routes/Checkpoint.js"
 import resMsg from "./app/controllers/ErrorsPage.js";
 
 
@@ -28,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/categorie", Categorie);
 app.use("/roadmap", roadmap);
 app.use("/message",Message);
-
+app.use("/checkpoint",Checkpoint);
 app.get("/", (req, res) => {
   res.send("Welcome to the project");
 });
