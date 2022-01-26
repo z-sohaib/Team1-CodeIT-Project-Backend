@@ -5,9 +5,10 @@ import {
   addArticle,
   deleteArticle,
 } from "../controllers/articleController.js";
+import { checkAdmin, checkAuth } from "../controllers/authController.js";
 
-router.get("/", getArticles);
-router.post("/add", addArticle);
-router.delete("/delete/:id", deleteArticle);
+router.get("/:cat?/:limit?", checkAuth, getArticles);
+router.post("/add", checkAdmin, addArticle);
+router.delete("/delete/:id", checkAdmin, deleteArticle);
 
 export default router;
