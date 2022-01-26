@@ -3,10 +3,10 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import resMsg from "../controllers/ErrorsPage.js";
 import { AdminModel } from "../models/Admin";
+import { RefreshTokens } from "../models/Tokens";
 
 const MAX_AGE = 15; //max age in seconds = 15 minutes
 const MAX_AGE_REFRESH = 60 * 60 * 24 * 60; //max age of refresh in seconds = 60 days
-let refreshTokens = []; //kinda the db of tokens xD , we will make a collection or a document for it
 
 //creates the jwt token and sends the cookie
 const createToken = (id, res) => {
@@ -17,7 +17,7 @@ const createToken = (id, res) => {
   return token;
 };
 //creates jwt refresh token and sends the cookie
-const createRefreshToken = (id, res) => {
+const createRefreshToken = async (id, res) => {
   const token = jwt.sign({ id }, "secret refresh key", {
     expiresIn: MAX_AGE_REFRESH,
   });
@@ -25,7 +25,7 @@ const createRefreshToken = (id, res) => {
     httpOnly: true,
     maxAge: MAX_AGE_REFRESH * 1000,
   });
-  refreshTokens.push(token);
+  await RefreshTokens.updateOne({}, { $push: { refreshTokens: token } });
   return token;
 };
 
@@ -71,7 +71,7 @@ export async function login(req, res) {
       return res.status(400).json({ status: 400, message: "wrong pasword" });
 
     createToken(user._id, res);
-    createRefreshToken(user._id, res);
+    await createRefreshToken(user._id, res);
 
     const returnedUser = {
       _id: user._id,
@@ -86,14 +86,16 @@ export async function login(req, res) {
   }
 }
 
-export function logout(req, res) {
+export async function logout(req, res) {
   try {
     res.cookie("jwt", "", { maxAge: 1 });
     //removes refresh token from db
     res.cookie("jwt_refresh", "", { maxAge: 1 });
-    refreshTokens = refreshTokens.filter(
-      (token) => token !== req.cookies.jwt_refresh
+    await RefreshTokens.updateOne(
+      {},
+      { $pull: { refreshTokens: req.cookies.jwt_refresh } }
     );
+
     return res.status(200).json({ status: 200, message: "you are logged out" });
   } catch (error) {
     return res.status(500).json(resMsg.errorIntern);
@@ -142,7 +144,9 @@ export async function tokenRefresh(req, res) {
       token,
       "secret refresh key" /*process.env.REFRESH_SECRET*/
     );
-    if (!refreshTokens.includes(token))
+    const tokens = await RefreshTokens.findOne({});
+    console.log(tokens);
+    if (!tokens.refreshTokens.includes(token))
       return res
         .status(400)
         .json({ status: 400, message: "invalid refresh token" });
