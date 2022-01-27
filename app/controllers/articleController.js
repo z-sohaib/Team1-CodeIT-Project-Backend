@@ -8,7 +8,7 @@ export async function getArticles(req, res) {
     return res.status(200).json({
       status: 200,
       data: articles,
-      message: "Succesfully Retrieved articles",
+      message: `Succesfully Retrieved articles for category: ${cat}`,
     });
   } catch (e) {
     return res.status(500).json(resMsg.errorIntern);
