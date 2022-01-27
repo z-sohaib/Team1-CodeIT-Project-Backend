@@ -11,10 +11,10 @@ import resMsg from "../controllers/ErrorsPage.js";
 const router = express.Router();
 
 router.get('/', get_all_cat)
-router.get('/get/:IdCategorie', get_categorie)
+router.get('/get/:id', get_categorie)
 router.post("/add", add_categorie)
-router.delete("/delete/:IdCategorie", delete_categorie)
-router.put("/update/:IdCategorie", update_categorie)
+router.delete("/delete/:id", delete_categorie)
+router.put("/update/:id", update_categorie)
 router.all("*",(req,res)=>{
     res.status(400).json(resMsg.notValide)
   })

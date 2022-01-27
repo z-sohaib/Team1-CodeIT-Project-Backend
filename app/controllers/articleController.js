@@ -1,14 +1,10 @@
-import ArticleModel from "../models/Article";
+import Article from "../models/Article";
 import resMsg from "../controllers/ErrorsPage.js";
 
 export async function getArticles(req, res) {
   try {
-    const { cat, limit } = req.params;
-    const numOfArticles = limit ? limit : 15;
-    const query = cat ? { categorie: cat } : {};
-
-    const articles = await ArticleModel.find(query).limit(numOfArticles);
-
+    const limit = req.params.limit ? req.params.limit : 15;
+    const articles = await Article.find({}).limit(limit);
     return res.status(200).json({
       status: 200,
       data: articles,
@@ -21,11 +17,9 @@ export async function getArticles(req, res) {
 
 export async function addArticle(req, res) {
   try {
-    const {
-      body: { categorie, tags, title, resume, picture },
-    } = req;
+    const { categorie, tags, title, resume, picture } = req.body;
 
-    await ArticleModel.create({ categorie, tags, title, resume, picture });
+    await Article.create({ categorie, tags, title, resume, picture });
 
     return res
       .status(200)
@@ -37,13 +31,13 @@ export async function addArticle(req, res) {
 
 export async function deleteArticle(req, res) {
   try {
-    const article = await ArticleModel.findById(req.params.id);
+    const article = await Article.findById(req.params.id);
     if (!article) {
       return res
         .status(404)
         .json({ status: 404, message: "there is no article with this id" });
     }
-    await ArticleModel.deleteOne({ _id: req.params.id });
+    await Article.deleteOne({ _id: req.params.id });
     return res
       .status(200)
       .json({ status: 200, data: article, message: "Succesfully deleted" });
