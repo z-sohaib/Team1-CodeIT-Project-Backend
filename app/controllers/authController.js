@@ -2,22 +2,21 @@ import { UserModel } from "../models/User";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import resMsg from "../controllers/ErrorsPage.js";
-import { AdminModel } from "../models/Admin";
 import { RefreshTokens } from "../models/Tokens";
 
 const MAX_AGE = 15; //max age in seconds = 15 minutes
 const MAX_AGE_REFRESH = 60 * 60 * 24 * 60; //max age of refresh in seconds = 60 days
 
 //creates the jwt token and sends the cookie
-const createToken = (id, res) => {
+export const createToken = (id, res) => {
   const token = jwt.sign({ id }, "secret key", {
     expiresIn: MAX_AGE,
   });
-  res.cookie("jwt", token, { httpOnly: true });
+  res.cookie("jwt", token, { httpOnly: true, maxAge: MAX_AGE * 1000 });
   return token;
 };
 //creates jwt refresh token and sends the cookie
-const createRefreshToken = async (id, res) => {
+export const createRefreshToken = async (id, res) => {
   const token = jwt.sign({ id }, "secret refresh key", {
     expiresIn: MAX_AGE_REFRESH,
   });
@@ -102,38 +101,6 @@ export async function logout(req, res) {
   }
 }
 
-export function checkAuth(req, res, next) {
-  const token = req.cookies.jwt;
-  try {
-    if (!token)
-      return res
-        .status(401)
-        .json({ status: 401, message: "user not authenticated" });
-
-    jwt.verify(token, "secret key");
-
-    next();
-  } catch (e) {
-    if (e.message === "jwt expired")
-      return res.status(403).json({ status: 403, message: "expired token" });
-    return res.status(403).json({ status: 403, message: "not authorized" });
-  }
-}
-
-//will probably change the file structure and move this
-export async function checkAdmin(req, res, next) {
-  const token = req.params.token;
-  try {
-    const checkedToken = jwt.verify(token);
-    const admin = await AdminModel.findById(checkedToken.id);
-    if (admin) next();
-    else
-      return res.status(403).json({ status: 403, message: "not authorized" });
-  } catch (e) {
-    res.status(403).json({ status: 403, message: "not authorized" });
-  }
-}
-
 export async function tokenRefresh(req, res) {
   try {
     const token = req.cookies.jwt_refresh;
@@ -145,7 +112,6 @@ export async function tokenRefresh(req, res) {
       "secret refresh key" /*process.env.REFRESH_SECRET*/
     );
     const tokens = await RefreshTokens.findOne({});
-    console.log(tokens);
     if (!tokens.refreshTokens.includes(token))
       return res
         .status(400)
