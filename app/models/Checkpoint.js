@@ -3,46 +3,51 @@ const DOCUMENT_NAME = 'checkpoint';
 const COLLECTION_NAME = 'checkpoints';
 
 export const checkpointSchema = new mongoose.Schema({
-    name: {                                
+    name: {
         type: mongoose.Schema.Types.String,
         required: true,
     },
-    number : { 
+    number: {
         type: mongoose.Schema.Types.Number,
-        required: true, 
+        required: true,
+        unique: true,
     },
     expvalue: {
         type: mongoose.Schema.Types.Number,
         required: true,
     },
-    listOfprimarylinks: [ {
-        type: mongoose.Schema.Types.String,
-        required: true,
-    }],
-    listofsecondarylinks: [ {
-        type: mongoose.Schema.Types.String,
-        required: true,
-    }],
-    quizz:[
-        {
-            Question: { 
-                type: mongoose.Schema.Types.String,
-                required: true,
-            },
-            Answer: { 
-                type: mongoose.Schema.Types.String,
-                required: true,
-            },
-            Proposition: { 
-                type: mongoose.Schema.Types.String,
-                required: true,
-            },
-            
+    listOfprimarylinks: [{
+        link: {
+            type: mongoose.Schema.Types.String,
+            required: true,
         }
-    ], 
-    project : {
+    }],
+    listofsecondarylinks: [{
+        link: {
+            type: mongoose.Schema.Types.String,
+            required: true,
+        }
+    }],
+    quizz: [
+        {
+            Question: {
+                type: mongoose.Schema.Types.String,
+                required: true,
+            },
+            Answer: {
+                type: mongoose.Schema.Types.String,
+                required: true,
+            },
+            Proposition: {
+                type: mongoose.Schema.Types.String,
+                required: true,
+            },
+
+        }
+    ],
+    project: {
         type: mongoose.Schema.Types.String,
-        required: true,
+        //required: true,
     }
 }, {
     timestamps: true,
