@@ -23,4 +23,4 @@ export const projectsubmissionSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-export const ProjectSubmissionModel = mongoose.model(DOCUMENT_NAME, projectsubmissionSchema, COLLECTION_NAME)  
+export default mongoose.model(DOCUMENT_NAME, projectsubmissionSchema, COLLECTION_NAME)  

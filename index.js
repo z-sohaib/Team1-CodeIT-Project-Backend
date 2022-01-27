@@ -6,7 +6,7 @@ import roadmap from "./app/routes/RoadMap.js"
 import Message from "./app/routes/Messages.js"
 import Checkpoint from "./app/routes/Checkpoint.js"
 import resMsg from "./app/controllers/ErrorsPage.js";
-
+import Project from "./app/routes/ProjectSubmission.js"
 
 import "dotenv/config";
 
@@ -30,6 +30,7 @@ app.use("/categorie", Categorie);
 app.use("/roadmap", roadmap);
 app.use("/message",Message);
 app.use("/checkpoint",Checkpoint);
+app.use("/projectSubmission",Project);
 app.get("/", (req, res) => {
   res.send("Welcome to the project");
 });
