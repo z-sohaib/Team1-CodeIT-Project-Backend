@@ -8,7 +8,7 @@ export async function get_all_raodmap(req, res) {
         const id = req.params.ID_cat;
         const categorie = await Categorie.findOne({ _id: id });
         if (categorie !== null) {
-            const result = categorie.ListOfRoadMap;
+            const result = categorie.listofroadmap;
             const alpha = [];   // list that has all my roadmap of this
             result.forEach(async element => {
                 await RoadMap.findOne({ _id: element._id }).exec()
@@ -36,12 +36,12 @@ export async function add_roadmap(req, res) {
         const id_cat = req.params.ID_Cat;
         if (req.body.Name !== null) {
             const roadmap = new RoadMap({
-                Name: req.body.Name,
-                ListofCheckpoint: [],
+                name: req.body.name,
+                listofcheckpoint: [],
             });
             const cat = await Categorie.findOne({ _id: id_cat });
             if (cat !== null) {
-                cat.ListOfRoadMap.push(roadmap._id);
+                cat.listofroadmap.push(roadmap._id);
                 cat.save();
                 roadmap.save();
                 res.status(201).json(roadmap);
@@ -66,13 +66,13 @@ export async function delete_roadmap(req, res) {
         //delete the id of roadmap from "categorie.ListOfRoadmap"
         const cat = await Categorie.findOne({ _id: id_cat });
         if (cat !== null) {
-            const newlist = cat.ListOfRoadMap.filter(item => item._id.toString() !== id);
-            cat.ListOfRoadMap = newlist;
+            const newlist = cat.listofroadmap.filter(item => item._id.toString() !== id);
+            cat.listofroadmap = newlist;
             cat.save();
             // I have to delete the checkpoints of this Roadmap!
             const roadmap = RoadMap.findOne({ _id: id });
             if (roadmap !== null) {
-                roadmap.ListofCheckpoint?.forEach(async element => {
+                roadmap.listofcheckpoint?.forEach(async element => {
                     await Checkpoint.deleteOne({ _id: element._id })
                 })
 
@@ -106,7 +106,7 @@ export function update_roadmap(req, res) {
             .exec()
             .then(roadmap => {
                 if (roadmap !== null) {
-                    roadmap.Name = req.body.Name;
+                    roadmap.name = req.body.name;
                     roadmap.save();
                     res.status(200).json(roadmap)
                 } else {

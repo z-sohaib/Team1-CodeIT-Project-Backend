@@ -35,9 +35,9 @@ export function get_categorie(req, res) {
 export async function add_categorie(req, res) {
     try {
         const categorie = new Categorie({
-            Name: req.body.Name,
-            ListOfRoadMap: [],
-            ListOfArticles: [],
+            name: req.body.name,
+            listofroadmap: [],
+            listofarticles: [],
         });
         categorie.save();
         return res.status(201).json(categorie);
@@ -52,11 +52,11 @@ export async function delete_categorie(req, res) {
     const id = req.params.id;
     //I have to delete the roadmaps/articles of this categorie
     const cat=await Categorie.findOne({_id:id});
-    const List1=cat.ListOfRoadMap;
+    const List1=cat.listofroadmap;
     List1.forEach(async element=>{
         await Roadmap.deleteOne({_id:element._id})
     })
-    const List2=cat.ListOfArticles;
+    const List2=cat.listofarticles;
     List2.forEach(async element=>{
         await Article.deleteOne({_id:element._id})
     })
@@ -80,14 +80,14 @@ export function update_categorie(req, res) {
         if (err) {
             res.status(404).json(resMsg.notFound);
         } else {
-            if (req.body.Name) {
-                object.Name = req.body.Name;
+            if (req.body.name) {
+                object.name = req.body.name;
             }
-            if (req.body.ListOfRoadMap) {
-                object.ListOfRoadMap = req.body.ListOfRoadMap;
+            if (req.body.listofroadmap) {
+                object.listofroadmap = req.body.listofroadmap;
             }
-            if (req.body.ListOfArticles) {
-                object.ListOfArticles = req.body.ListOfArticles;
+            if (req.body.listofarticles) {
+                object.listofarticles = req.body.listofarticles;
             }
             object.save((err, succes) => {
                 if (err) {
