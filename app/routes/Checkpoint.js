@@ -10,15 +10,15 @@ import { checkAdmin, checkAuth } from "../controllers/middlware.js";
 
 const router = express.Router();
 
-router.get("/:Id_Roadmap", checkAuth, get_all_checkpoint);
+router.get("/:Id_Roadmap",  get_all_checkpoint);//checkAuth,
 //router.get("/:Id_checkpoint",);
-router.post("/add/:Id_Roadmap", checkAdmin, add_checkpoint);
+router.post("/add/:Id_Roadmap",  add_checkpoint);//checkAdmin,
 router.delete(
   "/delete/:Id_roadmap/:Id_checkpoint",
-  checkAdmin,
+  //checkAdmin,
   delete_checkpoint
 );
-router.put("/update/:Id_checkpoint", checkAdmin, update_checkpoint);
+router.put("/update/:Id_checkpoint",  update_checkpoint);//checkAdmin,
 
 router.all("*", (req, res) => {
   res.status(400).json(resMsg.notValide);

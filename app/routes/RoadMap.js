@@ -12,11 +12,11 @@ const router = express.Router();
 
 router.get("/:ID_cat", get_all_raodmap);
 
-router.post("/add/:ID_Cat", checkAdmin, add_roadmap);
+router.post("/add/:ID_Cat",  add_roadmap);//checkAdmin,
 
-router.delete("/delete/:ID_cat/:IDroadmap", checkAdmin, delete_roadmap);
+router.delete("/delete/:ID_cat/:IDroadmap",  delete_roadmap);//checkAdmin,
 
-router.put("/update/:IDroadmap", checkAdmin, update_roadmap);
+router.put("/update/:IDroadmap",  update_roadmap);//checkAdmin,
 
 router.all("*", (req, res) => {
   res.status(400).json(resMsg.notValide);
