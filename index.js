@@ -8,6 +8,7 @@ import article from "./app/routes/Article.js";
 import Message from "./app/routes/Messages.js";
 import Checkpoint from "./app/routes/Checkpoint.js";
 import resMsg from "./app/controllers/ErrorsPage.js";
+import Project from "./app/routes/ProjectSubmission.js"
 import auth from "./app/routes/Auth.js";
 import admin from "./app/routes/Admin.js";
 
@@ -32,11 +33,12 @@ app.use(cookieParser());
 // Routing
 app.use("/categorie", Categorie);
 app.use("/roadmap", roadmap);
+app.use("/message",Message);
+app.use("/checkpoint",Checkpoint);
+app.use("/projectSubmission",Project);
 app.use("/article", article);
 app.use("/auth", auth);
 app.use("/admin", admin);
-app.use("/message", Message);
-app.use("/checkpoint", Checkpoint);
 app.get("/", (req, res) => {
   res.send("Welcome to the project");
 });

@@ -42,45 +42,33 @@ export function get_checkpoint(req, res) {
 export async function add_checkpoint(req, res) {
     const Id_Roadmap = req.params.Id_Roadmap;
     try {
-        if (req.body.name !== null) {
-            if (req.body.number !== null) {
-                if (req.body.expvalue !== null) {
-                    if (req.body.listOfprimarylinks !== []) {
-                        if (req.body.quizz !== [] || req.body.project !== null) {
-                            const checkpoint = new Checkpoint({
-                                name: req.body.name,
-                                number: req.body.number,
-                                expvalue: req.body.expvalue,
-                                listOfprimarylinks: req.body.listOfprimarylinks,
-                                listofsecondarylinks: req.body.listofsecondarylinks,
-                                project: req.body.project,
-                            })
-                            req.body.quizz?.forEach(element => {
-                                checkpoint.quizz.push(element)
-                            })
-                            Roadmap.findOne({ _id: Id_Roadmap }).exec().then(async roadmap => {
-                                roadmap.listofcheckpoint.push({ _id: checkpoint._id });
-                                roadmap.save();
-                                checkpoint.save();
-                                res.status(201).json(checkpoint);
-                            }).catch(err => res.status(404).json(err.message));
+        if (req.body.name !== null && req.body.number !== null && req.body.expvalue !== null && req.body.listOfprimarylinks !== []) {
+            if (req.body.quizz !== [] || req.body.project !== null) {
+                const checkpoint = new Checkpoint({
+                    name: req.body.name,
+                    number: req.body.number,
+                    expvalue: req.body.expvalue,
+                    listOfprimarylinks: req.body.listOfprimarylinks,
+                    listofsecondarylinks: req.body.listofsecondarylinks,
+                    project: req.body.project,
+                })
+                req.body.quizz?.forEach(element => {
+                    checkpoint.quizz.push(element)
+                })
+                Roadmap.findOne({ _id: Id_Roadmap }).exec().then(async roadmap => {
+                    roadmap.listofcheckpoint.push({ _id: checkpoint._id });
+                    roadmap.save();
+                    checkpoint.save();
+                    res.status(201).json(checkpoint);
+                }).catch(err => res.status(404).json(err.message));
 
 
 
-                        } else {
-                            console.log("er1")
-                        }
-                    } else {
-                        console.log("er2")
-                    }
-                } else {
-                    console.log("er3")
-                }
             } else {
-                console.log("er4")
+                res.status(400).json({ "message": "Quizz && project ==null" })
             }
         } else {
-            console.log("er5")
+            res.status(404).json(resMsg.notValide)
         }
 
     } catch (error) {
@@ -124,16 +112,16 @@ export function update_checkpoint(req, res) {
                 req.body.name ? element.name = req.body.name : element.name = element.name;
                 req.body.number ? element.number = req.body.number : element.number = element.number;
                 req.body.expvalue ? element.expvalue = req.body.expvalue : element.expvalue = element.expvalue;
-                req.body.listOfprimarylinks ? req.body.listOfprimarylinks?.forEach(item=>{
+                req.body.listOfprimarylinks ? req.body.listOfprimarylinks?.forEach(item => {
                     element.listOfprimarylinks.push(item)
                 }) : element.listOfprimarylinks;
-                req.body.listofsecondarylinks ? req.body.listofsecondarylinks?.forEach(item=>{
+                req.body.listofsecondarylinks ? req.body.listofsecondarylinks?.forEach(item => {
                     element.listofsecondarylinks.push(item)
                 }) : element.listofsecondarylinks;
-                req.body.quizz ? req.body.quizz?.forEach(item=>{
+                req.body.quizz ? req.body.quizz?.forEach(item => {
                     element.quizz.push(item)
                 }) : element.quizz;
-                req.body.project? element.project=req.body.project:element.project;
+                req.body.project ? element.project = req.body.project : element.project;
                 element.save();
                 res.status(201).json(element);
             })
