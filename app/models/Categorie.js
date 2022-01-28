@@ -16,14 +16,14 @@ export const categorieSchema = new mongoose.Schema(
         },
       },
     ],
-    listofarticles: [
-      {
-        id: {
-          type: mongoose.Schema.Types.String,
-          required: true,
-        },
-      },
-    ],
+    // listofarticles: [
+    //   {
+    //     id: {
+    //       type: mongoose.Schema.Types.String,
+    //       required: true,
+    //     },
+    //   },
+    // ],
   },
   {
     timestamps: true,

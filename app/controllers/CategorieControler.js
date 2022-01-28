@@ -37,7 +37,6 @@ export async function add_categorie(req, res) {
         const categorie = new Categorie({
             name: req.body.name,
             listofroadmap: [],
-            listofarticles: [],
         });
         categorie.save();
         return res.status(201).json(categorie);
@@ -55,10 +54,6 @@ export async function delete_categorie(req, res) {
     const List1=cat.listofroadmap;
     List1.forEach(async element=>{
         await Roadmap.deleteOne({_id:element._id})
-    })
-    const List2=cat.listofarticles;
-    List2.forEach(async element=>{
-        await Article.deleteOne({_id:element._id})
     })
     //deleting this categorie doc!
     Categorie.remove({ _id: id }).exec()
@@ -85,9 +80,6 @@ export function update_categorie(req, res) {
             }
             if (req.body.listofroadmap) {
                 object.listofroadmap = req.body.listofroadmap;
-            }
-            if (req.body.listofarticles) {
-                object.listofarticles = req.body.listofarticles;
             }
             object.save((err, succes) => {
                 if (err) {

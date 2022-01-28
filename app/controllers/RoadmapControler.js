@@ -37,6 +37,7 @@ export async function add_roadmap(req, res) {
         if (req.body.Name !== null) {
             const roadmap = new RoadMap({
                 name: req.body.name,
+                url: req.body.url,
                 listofcheckpoint: [],
             });
             const cat = await Categorie.findOne({ _id: id_cat });
