@@ -1,5 +1,5 @@
 import Project from "../models/ProjectSubmission.js";
-import resMsg from "../controllers/ErrorsPage.js";
+import resMsg from "../utils/ErrorsPage.js";
 
 export function get_all(req, res) {
     try {

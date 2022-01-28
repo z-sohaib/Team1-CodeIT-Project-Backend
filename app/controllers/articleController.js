@@ -1,5 +1,5 @@
 import Article from "../models/Article";
-import resMsg from "../controllers/ErrorsPage.js";
+import resMsg from "../utils/ErrorsPage.js";
 
 export async function getArticles(req, res) {
   try {

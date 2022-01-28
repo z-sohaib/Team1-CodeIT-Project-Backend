@@ -1,4 +1,4 @@
-import { AdminModel } from "../models/Admin";
+import { AdminModel } from "../models/Admin.js";
 import jwt from "jsonwebtoken";
 
 export function checkAuth(req, res, next) {
