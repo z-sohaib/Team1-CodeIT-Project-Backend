@@ -4,9 +4,9 @@ import {
   signup,
   login,
   logout,
-  checkAdmin,
   tokenRefresh,
 } from "../controllers/authController";
+import { checkAdmin } from "../controllers/middlware";
 
 router.post("/signup", checkAdmin, signup);
 router.post("/login", login);

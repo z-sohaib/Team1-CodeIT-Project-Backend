@@ -5,10 +5,11 @@ import ConnectDB from "./DB/db_init.js";
 import Categorie from "./app/routes/Categorie.js";
 import roadmap from "./app/routes/RoadMap.js";
 import article from "./app/routes/Article.js";
-import Message from "./app/routes/Messages.js"
-import Checkpoint from "./app/routes/Checkpoint.js"
+import Message from "./app/routes/Messages.js";
+import Checkpoint from "./app/routes/Checkpoint.js";
 import resMsg from "./app/controllers/ErrorsPage.js";
-import auth from "./app/routes/Auth";
+import auth from "./app/routes/Auth.js";
+import admin from "./app/routes/Admin.js";
 
 import "dotenv/config";
 
@@ -33,8 +34,9 @@ app.use("/categorie", Categorie);
 app.use("/roadmap", roadmap);
 app.use("/article", article);
 app.use("/auth", auth);
-app.use("/message",Message);
-app.use("/checkpoint",Checkpoint);
+app.use("/admin", admin);
+app.use("/message", Message);
+app.use("/checkpoint", Checkpoint);
 app.get("/", (req, res) => {
   res.send("Welcome to the project");
 });
