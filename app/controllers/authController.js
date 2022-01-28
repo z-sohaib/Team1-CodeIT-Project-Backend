@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import resMsg from "../utils/ErrorsPage.js";
 import { RefreshTokens } from "../models/Tokens";
 
-const MAX_AGE = 15; //max age in seconds = 15 minutes
+const MAX_AGE = 15*60; //max age in seconds = 15 minutes
 const MAX_AGE_REFRESH = 60 * 60 * 24 * 60; //max age of refresh in seconds = 60 days
 
 //creates the jwt token and sends the cookie
