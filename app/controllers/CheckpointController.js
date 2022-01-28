@@ -39,6 +39,7 @@ export function get_checkpoint(req, res) {
         })
 }
 */
+
 export async function add_checkpoint(req, res) {
     const Id_Roadmap = req.params.Id_Roadmap;
     try {

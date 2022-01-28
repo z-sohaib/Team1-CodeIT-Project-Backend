@@ -69,7 +69,7 @@ export async function login(req, res) {
     if (!isMatch)
       return res.status(400).json({ status: 400, message: "wrong pasword" });
 
-    createToken(user._id, res);
+    const token = createToken(user._id, res);
     await createRefreshToken(user._id, res);
 
     const returnedUser = {
@@ -79,7 +79,7 @@ export async function login(req, res) {
     };
     return res
       .status(200)
-      .json({ status: 200, data: returnedUser, message: "you are logged in" });
+      .json({ status: 200, data: returnedUser, token: token, message: "you are logged in" });
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message });
   }
