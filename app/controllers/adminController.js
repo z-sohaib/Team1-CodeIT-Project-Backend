@@ -61,7 +61,11 @@ export async function admin_login(req, res) {
     createRefreshToken(admin._id, res);
     return res //else : the admin is loged in
       .status(200)
-      .json({ status: 201, message: "you are loged in" });
+      .json({
+        status: 201,
+        data: { id: admin._id, username: admin.username },
+        message: "you are loged in",
+      });
   } catch (e) {
     return res.status(500).json(resMsg.errorIntern);
   }
@@ -73,7 +77,7 @@ export async function delete_admin_account(req, res) {
     await AdminModel.deleteOne({ _id: req.params.id }); //delete the admin in the DB
     return res
       .status(200)
-      .json({ status: 200, data: article, message: "Succesfully deleted" });
+      .json({ status: 200, message: "Succesfully deleted" });
   } catch (e) {
     return res.status(500).json(resMsg.errorIntern);
   }

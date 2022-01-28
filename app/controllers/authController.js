@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import resMsg from "../controllers/ErrorsPage.js";
 import { RefreshTokens } from "../models/Tokens";
 
-const MAX_AGE = 15; //max age in seconds = 15 minutes
+const MAX_AGE = 60 * 15; //max age in seconds = 15 minutes
 const MAX_AGE_REFRESH = 60 * 60 * 24 * 60; //max age of refresh in seconds = 60 days
 
 //creates the jwt token and sends the cookie
@@ -41,7 +41,6 @@ export async function signup(req, res) {
 
     const user = await UserModel.create({
       username,
-      categoriefav: "default",
       email,
       password: hashedPw,
       roadposition: [],
@@ -52,7 +51,11 @@ export async function signup(req, res) {
     createToken(user._id, res);
     createRefreshToken(user._id, res);
 
-    res.status(201).json({ status: 201, data: user._id, message: "signed up" });
+    res.status(201).json({
+      status: 201,
+      data: { username: user.username, id: user._id },
+      message: "signed up",
+    });
   } catch (e) {
     res.status(400).json({ status: 400, message: e.message });
   }
@@ -72,14 +75,11 @@ export async function login(req, res) {
     createToken(user._id, res);
     await createRefreshToken(user._id, res);
 
-    const returnedUser = {
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-    };
-    return res
-      .status(200)
-      .json({ status: 200, data: returnedUser, message: "you are logged in" });
+    return res.status(200).json({
+      status: 200,
+      data: { username: user.username, id: user._id },
+      message: "you are logged in",
+    });
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message });
   }
@@ -88,8 +88,8 @@ export async function login(req, res) {
 export async function logout(req, res) {
   try {
     res.cookie("jwt", "", { maxAge: 1 });
-    //removes refresh token from db
     res.cookie("jwt_refresh", "", { maxAge: 1 });
+    //removes refresh token from db
     await RefreshTokens.updateOne(
       {},
       { $pull: { refreshTokens: req.cookies.jwt_refresh } }

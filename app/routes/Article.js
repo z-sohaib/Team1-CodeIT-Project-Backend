@@ -7,7 +7,7 @@ import {
 } from "../controllers/articleController.js";
 import { checkAdmin } from "../controllers/middlware.js";
 
-router.get("/:cat?/:skip?", getArticles);
+router.get("/", getArticles);
 router.post("/add", checkAdmin, addArticle);
 router.delete("/delete/:id", checkAdmin, deleteArticle);
 

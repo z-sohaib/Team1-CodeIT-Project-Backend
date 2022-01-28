@@ -12,8 +12,8 @@ export function checkAuth(req, res, next) {
           .status(401)
           .json({ status: 401, message: "user not authenticated" });
 
-    jwt.verify(token, "secret key");
-
+    const decodedToken = jwt.verify(token, "secret key");
+    req.decodedToken = decodedToken;
     next();
   } catch (e) {
     return res.status(403).json({ status: 403, message: "not authorized" });
