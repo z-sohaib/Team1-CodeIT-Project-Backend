@@ -1,15 +1,16 @@
+import "dotenv/config";
 import { UserModel } from "../models/User";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import resMsg from "../utils/ErrorsPage.js";
 import { RefreshTokens } from "../models/Tokens";
 
-const MAX_AGE = 15*60; //max age in seconds = 15 minutes
+const MAX_AGE = 15 * 60; //max age in seconds = 15 minutes
 const MAX_AGE_REFRESH = 60 * 60 * 24 * 60; //max age of refresh in seconds = 60 days
 
 //creates the jwt token and sends the cookie
 export const createToken = (id, res) => {
-  const token = jwt.sign({ id }, "secret key", {
+  const token = jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
     expiresIn: MAX_AGE,
   });
   res.cookie("jwt", token, { httpOnly: true, maxAge: MAX_AGE * 1000 });
@@ -17,7 +18,7 @@ export const createToken = (id, res) => {
 };
 //creates jwt refresh token and sends the cookie
 export const createRefreshToken = async (id, res) => {
-  const token = jwt.sign({ id }, "secret refresh key", {
+  const token = jwt.sign({ id }, process.env.JWT_REFRESH_KEY, {
     expiresIn: MAX_AGE_REFRESH,
   });
   res.cookie("jwt_refresh", token, {
@@ -41,7 +42,6 @@ export async function signup(req, res) {
 
     const user = await UserModel.create({
       username,
-      categoriefav: "default",
       email,
       password: hashedPw,
       roadposition: [],
@@ -52,7 +52,11 @@ export async function signup(req, res) {
     createToken(user._id, res);
     createRefreshToken(user._id, res);
 
-    res.status(201).json({ status: 201, data: user._id, message: "signed up" });
+    res.status(201).json({
+      status: 201,
+      data: { username: user.username, id: user._id },
+      message: "signed up",
+    });
   } catch (e) {
     res.status(400).json({ status: 400, message: e.message });
   }
@@ -69,17 +73,14 @@ export async function login(req, res) {
     if (!isMatch)
       return res.status(400).json({ status: 400, message: "wrong pasword" });
 
-    const token = createToken(user._id, res);
+    createToken(user._id, res);
     await createRefreshToken(user._id, res);
 
-    const returnedUser = {
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-    };
-    return res
-      .status(200)
-      .json({ status: 200, data: returnedUser, token: token, message: "you are logged in" });
+    return res.status(200).json({
+      status: 200,
+      data: { username: user.username, id: user._id },
+      message: "you are logged in",
+    });
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message });
   }
@@ -107,10 +108,7 @@ export async function tokenRefresh(req, res) {
     if (!token)
       return res.status(400).json({ status: 400, message: "no token" });
 
-    const verefiedToken = jwt.verify(
-      token,
-      "secret refresh key" /*process.env.REFRESH_SECRET*/
-    );
+    const verefiedToken = jwt.verify(token, process.env.JWT_REFRESH_KEY);
     const tokens = await RefreshTokens.findOne({});
     if (!tokens.refreshTokens.includes(token))
       return res
