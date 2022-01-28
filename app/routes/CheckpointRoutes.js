@@ -1,12 +1,12 @@
 import express from "express";
-import resMsg from "../controllers/ErrorsPage.js";
+import resMsg from "../utils/ErrorsPage.js";
 import {
   get_all_checkpoint,
   add_checkpoint,
   delete_checkpoint,
   update_checkpoint,
-} from "../controllers/CheckpointControler.js";
-import { checkAdmin, checkAuth } from "../controllers/middlware.js";
+} from "../controllers/CheckpointController.js";
+import { checkAdmin, checkAuth } from "../middlewares/authMiddlware.js";
 
 const router = express.Router();
 

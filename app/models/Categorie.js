@@ -10,20 +10,20 @@ export const categorieSchema = new mongoose.Schema(
     },
     listofroadmap: [
       {
-        id: {
+        _id: {
           type: mongoose.Schema.Types.String,
           required: true,
         },
       },
     ],
-    listofarticles: [
-      {
-        id: {
-          type: mongoose.Schema.Types.String,
-          required: true,
-        },
-      },
-    ],
+    // listofarticles: [
+    //   {
+    //     id: {
+    //       type: mongoose.Schema.Types.String,
+    //       required: true,
+    //     },
+    //   },
+    // ],
   },
   {
     timestamps: true,

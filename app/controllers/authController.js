@@ -1,7 +1,7 @@
 import { UserModel } from "../models/User";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import resMsg from "../controllers/ErrorsPage.js";
+import resMsg from "../utils/ErrorsPage.js";
 import { RefreshTokens } from "../models/Tokens";
 
 const MAX_AGE = 60 * 15; //max age in seconds = 15 minutes

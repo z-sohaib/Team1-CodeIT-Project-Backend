@@ -1,7 +1,7 @@
 import RoadMap from "../models/Roadmap.js";
 import Categorie from "../models/Categorie.js";
 import Checkpoint from "../models/Checkpoint";
-import resMsg from "../controllers/ErrorsPage.js";
+import resMsg from "../utils/ErrorsPage.js";
 
 export async function get_all_raodmap(req, res) {
     try {
@@ -37,6 +37,7 @@ export async function add_roadmap(req, res) {
         if (req.body.Name !== null) {
             const roadmap = new RoadMap({
                 name: req.body.name,
+                url: req.body.url,
                 listofcheckpoint: [],
             });
             const cat = await Categorie.findOne({ _id: id_cat });

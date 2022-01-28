@@ -1,6 +1,6 @@
 import Checkpoint from "../models/Checkpoint.js"
 import Roadmap from "../models/Roadmap.js"
-import resMsg from "../controllers/ErrorsPage.js";
+import resMsg from "../utils/ErrorsPage.js";
 
 export async function get_all_checkpoint(req, res) {
     const Id_roadmap = req.params.Id_Roadmap;

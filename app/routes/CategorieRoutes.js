@@ -5,9 +5,9 @@ import {
   add_categorie,
   delete_categorie,
   update_categorie,
-} from "../controllers/CategorieControler.js";
-import resMsg from "../controllers/ErrorsPage.js";
-import { checkAdmin, checkAuth } from "../controllers/middlware.js";
+} from "../controllers/CategorieController.js";
+import resMsg from "../utils/ErrorsPage.js";
+import { checkAdmin, checkAuth } from "../middlewares/authMiddlware.js";
 
 const router = express.Router();
 

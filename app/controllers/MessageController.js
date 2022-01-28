@@ -1,5 +1,5 @@
 import Message from "../models/Message";
-import resMsg from "../controllers/ErrorsPage.js";
+import resMsg from "../utils/ErrorsPage.js";
 
 
 export function get_msg(req, res) {

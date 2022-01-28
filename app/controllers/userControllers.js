@@ -1,5 +1,5 @@
 import { UserModel } from "../models/User";
-import errMsg from "./ErrorsPage";
+import errMsg from "../utils/ErrorsPage";
 
 export async function getUser(req, res) {
   try {

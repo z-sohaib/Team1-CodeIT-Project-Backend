@@ -1,11 +1,11 @@
 import express from "express";
-import resMsg from "../controllers/ErrorsPage.js";
+import resMsg from "../utils/ErrorsPage.js";
 import {
   get_msg,
   send_msg,
   delete_msg,
-} from "../controllers/MessageControler.js";
-import { checkAdmin, checkAuth } from "../controllers/middlware.js";
+} from "../controllers/MessageController.js";
+import { checkAdmin, checkAuth } from "../middlewares/authMiddlware.js";
 
 const router = express.Router();
 

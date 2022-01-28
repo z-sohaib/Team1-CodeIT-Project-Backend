@@ -2,23 +2,24 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import ConnectDB from "./DB/db_init.js";
-import Categorie from "./app/routes/Categorie.js";
-import roadmap from "./app/routes/RoadMap.js";
-import article from "./app/routes/Article.js";
-import Message from "./app/routes/Messages.js";
-import Checkpoint from "./app/routes/Checkpoint.js";
-import resMsg from "./app/controllers/ErrorsPage.js";
-import Project from "./app/routes/ProjectSubmission.js";
-import auth from "./app/routes/Auth.js";
-import admin from "./app/routes/Admin.js";
-import user from "./app/routes/User.js";
+import Categorie from "./app/routes/CategorieRoutes.js";
+import roadmap from "./app/routes/RoadmapRoutes.js";
+import article from "./app/routes/ArticleRoutes.js";
+import Message from "./app/routes/MessagesRoutes.js";
+import Checkpoint from "./app/routes/CheckpointRoutes.js";
+import resMsg from "./app/utils/ErrorsPage.js";
+import Project from "./app/routes/ProjectSubmissionRoutes.js";
+import auth from "./app/routes/AuthRoutes.js";
+import admin from "./app/routes/AdminRoutes.js";
+import user from "./app/routes/UserRoutes.js";
 
 import "dotenv/config";
 
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:5000",
+  //origin: "http://localhost:5000",
+  origin: "https://afternoon-cliffs-13788.herokuapp.com/",
 };
 
 app.use(cors(corsOptions));

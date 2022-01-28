@@ -5,8 +5,8 @@ import {
   admin_login,
   admin_logout,
   delete_admin_account,
-} from "../controllers/adminController";
-import { checkAdmin } from "../controllers/middlware";
+} from "../controllers/adminController.js";
+import { checkAdmin } from "../middlewares/authMiddlware.js";
 
 router.post("/signup", checkAdmin, admin_signup);
 router.post("/login", admin_login);

@@ -1,5 +1,6 @@
-import { AdminModel } from "../models/Admin";
+import { AdminModel } from "../models/Admin.js";
 import jwt from "jsonwebtoken";
+import "dotenv/config";
 
 export function checkAuth(req, res, next) {
   const token = req.cookies.jwt;
@@ -23,7 +24,7 @@ export function checkAuth(req, res, next) {
 export async function checkAdmin(req, res, next) {
   const token = req.cookies.jwt;
   try {
-    const checkedToken = jwt.verify(token, "secret key");
+    const checkedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const admin = await AdminModel.findById(checkedToken.id);
     if (admin) next();
     else

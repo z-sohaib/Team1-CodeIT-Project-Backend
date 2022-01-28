@@ -5,7 +5,7 @@ import {
   addArticle,
   deleteArticle,
 } from "../controllers/articleController.js";
-import { checkAdmin } from "../controllers/middlware.js";
+import { checkAdmin } from "../middlewares/authMiddlware.js";
 
 router.get("/", getArticles);
 router.post("/add", checkAdmin, addArticle);

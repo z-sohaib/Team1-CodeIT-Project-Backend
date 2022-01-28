@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
+import "dotenv/config"
 
-
-const URI= "mongodb+srv://GDGCIT1:GDGCIT1@gdgcodeit1.zionq.mongodb.net/myDatabase?retryWrites=true&w=majority";
+const URI= process.env.DATABASE_URI;
 
 const ConnectDB = async () => {
     await mongoose.connect(URI, {useUnifiedTopology: true, useNewUrlParser: true});

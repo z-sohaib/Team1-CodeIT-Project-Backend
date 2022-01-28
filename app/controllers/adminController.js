@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { AdminModel } from "../models/Admin";
-import resMsg from "../controllers/ErrorsPage.js";
+import resMsg from "../utils/ErrorsPage.js";
 import { createRefreshToken, createToken } from "./authController";
 import { RefreshTokens } from "../models/Tokens";
 

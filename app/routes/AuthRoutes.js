@@ -6,7 +6,7 @@ import {
   logout,
   tokenRefresh,
 } from "../controllers/authController";
-import { checkAdmin } from "../controllers/middlware";
+import { checkAdmin } from "../middlewares/authMiddlware.js";
 
 router.post("/signup", checkAdmin, signup);
 router.post("/login", login);

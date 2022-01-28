@@ -1,5 +1,5 @@
 import express from "express";
-import resMsg from "../controllers/ErrorsPage.js";
+import resMsg from "../utils/ErrorsPage.js";
 import { get_all,add_project,delete_project } from "../controllers/ProjectSubmission.js";
 const router= express.Router();
 
