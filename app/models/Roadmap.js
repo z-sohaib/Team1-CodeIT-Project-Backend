@@ -8,6 +8,10 @@ export const roadmapSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.String,
       required: true,
     },
+    url:{
+      type: mongoose.Schema.Types.String,
+      required:true,
+    },
     listofcheckpoint: [
       {
         _id: {
