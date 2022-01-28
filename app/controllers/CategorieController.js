@@ -1,7 +1,7 @@
 import Categorie from "../models/Categorie.js";
 import Roadmap from "../models/Roadmap.js";
 import Article from "../models/Article";
-import resMsg from "../controllers/ErrorsPage.js";
+import resMsg from "../utils/ErrorsPage.js";
 
 export function get_all_cat(req, res) {
     try {
