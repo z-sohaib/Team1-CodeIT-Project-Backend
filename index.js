@@ -16,19 +16,11 @@ import "dotenv/config";
 
 const app = express();
 
-var whitelist = ['http://localhost:5000/', 'https://afternoon-cliffs-13788.herokuapp.com/']
+
 var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-// var corsOptions = {
-//   origin: "http://localhost:5000",
-// };
+  //origin: "http://localhost:5000",
+  origin: "https://afternoon-cliffs-13788.herokuapp.com/",
+};
 
 app.use(cors(corsOptions));
 
