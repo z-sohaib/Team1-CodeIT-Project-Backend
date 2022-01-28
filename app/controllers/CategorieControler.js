@@ -19,7 +19,7 @@ export function get_all_cat(req, res) {
 
 export function get_categorie(req, res) {
     try {
-        const id = req.params.IdCategorie;
+        const id = req.params.id;
         Categorie.find({ _id: id }).exec()
         .then(result => {
             res.status(200).json(result);
@@ -49,7 +49,7 @@ export async function add_categorie(req, res) {
 export async function delete_categorie(req, res) {
     try {
         // geting the params
-    const id = req.params.IdCategorie;
+    const id = req.params.id;
     //I have to delete the roadmaps/articles of this categorie
     const cat=await Categorie.findOne({_id:id});
     const List1=cat.ListOfRoadMap;

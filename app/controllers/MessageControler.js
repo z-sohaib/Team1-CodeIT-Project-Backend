@@ -31,7 +31,7 @@ export async function send_msg(req,res){
 
 export async function delete_msg(req,res){
     try {
-        const id= req.params.Id;
+        const id= req.params.id;
         await Message.deleteOne({_id:id});
         res.status(200).json({"message":"Done"});
     } catch (error) {

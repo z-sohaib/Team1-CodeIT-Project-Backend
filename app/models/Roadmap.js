@@ -1,23 +1,25 @@
-import mongoose from 'mongoose';
-const DOCUMENT_NAME = 'Roadmap';
-const COLLECTION_NAME = 'roadmaps';
+import mongoose from "mongoose";
+const DOCUMENT_NAME = "Roadmap";
+const COLLECTION_NAME = "roadmaps";
 
-
-export const roadmapSchema = new mongoose.Schema({ 
-    Name: {                                
-        type: mongoose.Schema.Types.String,
-        required: true,
+export const roadmapSchema = new mongoose.Schema(
+  {
+    name: {
+      type: mongoose.Schema.Types.String,
+      required: true,
     },
     listofcheckpoint: [
-          {
-            _id : {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        }
-          }
-        ],
-}, {
+      {
+        _id: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+        },
+      },
+    ],
+  },
+  {
     timestamps: true,
-});
+  }
+);
 
-export default mongoose.model(DOCUMENT_NAME, roadmapSchema, COLLECTION_NAME) 
+export default mongoose.model(DOCUMENT_NAME, roadmapSchema, COLLECTION_NAME);
