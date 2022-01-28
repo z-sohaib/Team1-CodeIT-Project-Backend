@@ -3,16 +3,12 @@ import resMsg from "../utils/ErrorsPage.js";
 
 export async function getArticles(req, res) {
   try {
-    const { cat, skip } = req.params;
-    const query = cat ? { categorie: cat } : {};
-    const skipped = skip ? skip : 0;
-
-    const articles = await Article.find(query).limit(20).skip(skipped);
+    const articles = await Article.find({});
 
     return res.status(200).json({
       status: 200,
       data: articles,
-      message: `Succesfully Retrieved articles for category: ${cat}`,
+      message: "Succesfully Retrieved articles",
     });
   } catch (e) {
     return res.status(500).json(resMsg.errorIntern);
